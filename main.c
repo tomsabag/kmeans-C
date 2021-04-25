@@ -55,7 +55,7 @@ int main(int argc, char *argv[]) {
     rewind(fptr);
 
     int dataPointSize = initializeDataPoints(fptr, c, dataPointArr);
-
+    free(c);
     fclose(fptr);
     Cluster clusters[k];
     for (int j=0; j < k; j++) {
@@ -63,7 +63,9 @@ int main(int argc, char *argv[]) {
     }
 
     Cluster* finalClusters = kmean(iterations, dataPointArr, clusters, dataPointSize, k);
+    free(clusters);
     printCentroids(finalClusters, k);
+    free(finalClusters);
 }
 
 int initializeDataPoints(FILE* fptr, char* c, DataPoint* dataPointArr) {
